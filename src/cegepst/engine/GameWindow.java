@@ -1,20 +1,16 @@
 package cegepst.engine;
 
+import cegepst.Ball;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class GameWindow extends JFrame {
 
     private static final int SLEEP = 25;
-    private Random rnd = new Random();
+    private Ball ball;
     private boolean playing = true;
-    private int radius = 25;
-    private int x = getRandomNumber(0 + radius * 2, 800 - radius * 2);
-    private int y = getRandomNumber(0 + radius * 2, 600 - radius * 2);
-    private int dx = getRandomNumber(0,1) == 0 ? 5 : -5;
-    private int dy = getRandomNumber(0,1) == 0 ? 5 : -5;
     private JPanel panel;
     private BufferedImage bufferedImage;
     private Graphics2D buffer;
@@ -36,7 +32,7 @@ public class GameWindow extends JFrame {
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
         add(panel); // ajouter la panneau dans le jframe
-
+        ball = new Ball();
     }
 
     public void start() {
@@ -69,21 +65,16 @@ public class GameWindow extends JFrame {
     }
 
     public void update() {
-        x += dx;
-        y += dy;
-        if (y <= radius || y >= 600 - radius) {
-            dy *= -1;
-            score += 10;
-        }
-        if (x <= radius || x >= 800 - radius) {
-            dx *= -1;
+        ball.update();
+        if (ball.hasTouchedBound()) {
             score += 10;
         }
     }
 
     public void drawOnBuffer() {
         buffer.setPaint(Color.RED);
-        buffer.fillOval(x, y, radius * 2, radius * 2);
+        buffer.fillOval(ball.getX(), ball.getY(), ball.getRadius() * 2, ball.getRadius() * 2);
+
         buffer.setPaint(Color.WHITE);
         buffer.drawString("Score " + score, 10, 20);
     }
@@ -95,8 +86,6 @@ public class GameWindow extends JFrame {
         graphics2D.dispose();
     }
 
-    private int getRandomNumber(int min, int max) {
-        return  rnd.nextInt((max - min) + 1) + min;
-    }
+
 
 }
