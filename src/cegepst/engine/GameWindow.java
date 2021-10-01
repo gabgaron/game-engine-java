@@ -11,10 +11,10 @@ public class GameWindow extends JFrame {
     private Random rnd = new Random();
     private boolean playing = true;
     private int radius = 25;
-    private int x = 200;
-    private int y = 200;
-    private int dx = 1;
-    private int dy = 1;
+    private int x = getRandomNumber(0 + radius * 2, 800 - radius * 2);
+    private int y = getRandomNumber(0 + radius * 2, 600 - radius * 2);
+    private int dx = getRandomNumber(0,1) == 0 ? 5 : -5;
+    private int dy = getRandomNumber(0,1) == 0 ? 5 : -5;
     private JPanel panel;
     private BufferedImage bufferedImage;
     private Graphics2D buffer;
@@ -69,7 +69,16 @@ public class GameWindow extends JFrame {
     }
 
     public void update() {
-
+        x += dx;
+        y += dy;
+        if (y <= radius || y >= 600 - radius) {
+            dy *= -1;
+            score += 10;
+        }
+        if (x <= radius || x >= 800 - radius) {
+            dx *= -1;
+            score += 10;
+        }
     }
 
     public void drawOnBuffer() {
@@ -85,4 +94,9 @@ public class GameWindow extends JFrame {
         Toolkit.getDefaultToolkit().sync();
         graphics2D.dispose();
     }
+
+    private int getRandomNumber(int min, int max) {
+        return  rnd.nextInt((max - min) + 1) + min;
+    }
+
 }
