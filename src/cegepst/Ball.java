@@ -1,5 +1,6 @@
 package cegepst;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Ball {
@@ -32,6 +33,11 @@ public class Ball {
         }
     }
 
+    public void draw(Graphics2D buffer) {
+        buffer.setPaint(Color.RED);
+        buffer.fillOval(x, y, radius * 2, radius * 2);
+    }
+
     public boolean hasTouchedHorizontalBound() {
         return x <= radius || x >= 800 - radius;
     }
@@ -42,18 +48,6 @@ public class Ball {
 
     public boolean hasTouchedBound() {
         return hasTouchedVerticalBound() || hasTouchedHorizontalBound();
-    }
-
-    public int getRadius() {
-        return radius;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     private int getRandomNumber(int min, int max) {
