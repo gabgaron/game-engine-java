@@ -15,7 +15,7 @@ public class Game {
     private JPanel panel;
     private BufferedImage bufferedImage;
     private Graphics2D buffer;
-    private long before;
+    private long syncTime;
     private int score = 0;
 
     public Game() {
@@ -26,31 +26,20 @@ public class Game {
 
     public void start() {
         frame.setVisible(true);
-        before = System.currentTimeMillis();
+        updateSyncTime();
         while(playing) {
             bufferedImage = new BufferedImage(800,600, BufferedImage.TYPE_INT_RGB);
             buffer = bufferedImage.createGraphics();
-            RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            buffer.setRenderingHints(rh);
+            buffer.setRenderingHints(getOptimalRenderingHints());
 
             update();
             drawOnBuffer();
             drawBufferOnScreen();
-
-            long sleep = SLEEP - System.currentTimeMillis() - before;
-            if (sleep < 0) {
-                sleep = 4;
-            }
-
-            try {
-                Thread.sleep(sleep);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            before = System.currentTimeMillis();
-
+            sleep();
         }
+
+        frame.setVisible(false);
+        frame.dispose();
     }
 
     public void update() {
@@ -74,12 +63,32 @@ public class Game {
         graphics2D.dispose();
     }
 
-    private void initializePanel() {
-        panel = new JPanel();
-        panel.setBackground(Color.BLUE);
-        panel.setFocusable(true);
-        panel.setDoubleBuffered(true);
-        frame.add(panel); // ajouter la panneau dans le jframe
+    private void sleep() {
+        try {
+            Thread.sleep(getSleepTime());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        updateSyncTime();
+    }
+
+    private void updateSyncTime() {
+        syncTime = System.currentTimeMillis();
+    }
+
+    private long getSleepTime() {
+        long sleep = SLEEP - System.currentTimeMillis() - syncTime;
+        if (sleep < 0) {
+            sleep = 4;
+        }
+        return sleep;
+    }
+
+
+    private RenderingHints getOptimalRenderingHints() {
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        return rh;
     }
 
     private void initializeFrame() {
@@ -94,4 +103,11 @@ public class Game {
         // setUndecorated(true);
     }
 
+    private void initializePanel() {
+        panel = new JPanel();
+        panel.setBackground(Color.BLUE);
+        panel.setFocusable(true);
+        panel.setDoubleBuffered(true);
+        frame.add(panel); // ajouter la panneau dans le jframe
+    }
 }
