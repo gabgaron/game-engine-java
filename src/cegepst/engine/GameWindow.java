@@ -6,11 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class GameWindow extends JFrame {
+public class GameWindow {
 
     private static final int SLEEP = 25;
     private Ball ball;
     private boolean playing = true;
+    private JFrame frame;
     private JPanel panel;
     private BufferedImage bufferedImage;
     private Graphics2D buffer;
@@ -18,12 +19,13 @@ public class GameWindow extends JFrame {
     private int score = 0;
 
     public GameWindow() {
-        setSize(800,600);
-        setLocationRelativeTo(null); // center frame on screen
-        setResizable(false);
-        setTitle("Bouncing Balls");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// close the app when click on the "X"
-        setState(JFrame.NORMAL);
+        frame = new JFrame();
+        frame.setSize(800,600);
+        frame.setLocationRelativeTo(null); // center frame on screen
+        frame.setResizable(false);
+        frame.setTitle("Bouncing Balls");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// close the app when click on the "X"
+        frame.setState(JFrame.NORMAL);
 
         // Supprimer la barre de l'application
         // setUndecorated(true);
@@ -31,12 +33,12 @@ public class GameWindow extends JFrame {
         panel.setBackground(Color.BLUE);
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
-        add(panel); // ajouter la panneau dans le jframe
+        frame.add(panel); // ajouter la panneau dans le jframe
         ball = new Ball(20);
     }
 
     public void start() {
-        setVisible(true);
+        frame.setVisible(true);
         before = System.currentTimeMillis();
         while(playing) {
             bufferedImage = new BufferedImage(800,600, BufferedImage.TYPE_INT_RGB);
