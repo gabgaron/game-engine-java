@@ -1,5 +1,7 @@
 package cegepst.engine;
 
+import java.awt.event.KeyListener;
+
 public abstract class Game {
 
     private boolean playing = true;
@@ -22,6 +24,10 @@ public abstract class Game {
 
     public final void stop() {
         playing = false;
+    }
+
+    public void addKeyListener(KeyListener listener) {
+        renderingEngine.addKeyListener(listener);
     }
 
     private void run() {
