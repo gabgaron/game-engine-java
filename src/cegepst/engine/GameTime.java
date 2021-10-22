@@ -33,7 +33,7 @@ public class GameTime {
         time-= TimeUnit.MINUTES.toMillis(minutes);
         long seconds = TimeUnit.MILLISECONDS.toSeconds(time);
         time -= TimeUnit.SECONDS.toMillis(seconds); // pour millisecondes restantes
-        return String.format("%02D:%02D%02D", hours, minutes, seconds);
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
     protected static GameTime getInstance() { // limiter la portée au package "engine"
