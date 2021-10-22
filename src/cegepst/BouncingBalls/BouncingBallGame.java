@@ -1,4 +1,4 @@
-package cegepst;
+package cegepst.BouncingBalls;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;

@@ -1,4 +1,4 @@
-package cegepst;
+package cegepst.BouncingBalls;
 
 public class App {
 
