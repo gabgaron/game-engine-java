@@ -1,7 +1,5 @@
 package cegepst.engine;
 
-import java.awt.*;
-
 public abstract class Game {
 
     private static final int SLEEP = 25;
@@ -11,7 +9,7 @@ public abstract class Game {
 
     public abstract void initialize();
     public abstract void update();
-    public abstract void draw(Graphics2D buffer);
+    public abstract void draw(Buffer buffer);
     public abstract void conclude();
 
     public Game() {
