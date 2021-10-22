@@ -8,6 +8,8 @@ public class BouncingBallGame extends Game {
     private int score = 0;
     private Ball ball;
 
+
+
     @Override
     public void initialize() {
         ball = new Ball(20);
