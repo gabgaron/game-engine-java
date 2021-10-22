@@ -4,8 +4,6 @@ public abstract class Game {
 
     private boolean playing = true;
     private RenderingEngine renderingEngine;
-    private GameTime gameTime;
-
 
     public abstract void initialize();
     public abstract void update();
@@ -28,12 +26,12 @@ public abstract class Game {
 
     private void run() {
         renderingEngine.start();
-        gameTime = new GameTime();
+        GameTime.getInstance();
         while(playing) {
             update();
             draw(renderingEngine.getRenderingBuffer());
             renderingEngine.renderBufferOnScreen();
-            gameTime.sleep();
+            GameTime.getInstance().synchronize();
         }
         renderingEngine.stop();
     }
