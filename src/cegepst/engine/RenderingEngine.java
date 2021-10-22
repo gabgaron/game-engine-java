@@ -32,6 +32,7 @@ public class RenderingEngine {
     }
 
     public Buffer getRenderingBuffer() {
+        //faire un viewport pour changer les dimensions
         bufferedImage = new BufferedImage(800,600, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bufferedImage.createGraphics();
         graphics.setRenderingHints(getOptimalRenderingHints());
