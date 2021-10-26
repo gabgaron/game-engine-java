@@ -10,17 +10,18 @@ public class Player extends ControllableEntity {
     public Player(int x, int y) {
         teleport(x, y);
         setDimension(30, 60);
+        setSpeed(4);
     }
 
     public void update(InputHandler inputHandler) {
         if (inputHandler.isDownPressed()) {
-            y += 4;
+            moveDown();
         } else if (inputHandler.isUpPressed()) {
-            y -= 4;
+            moveUp();
         } else if (inputHandler.isLeftPressed()) {
-            x -= 4;
+            moveLeft();
         } else if (inputHandler.isRightPressed()) {
-            x += 4;
+            moveRight();
         }
     }
 
