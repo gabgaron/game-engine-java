@@ -30,6 +30,10 @@ public class MovementController extends Controller{
         return isKeyPressed(downKey);
     }
 
+    public boolean isMoving() {
+        return isLeftPressed() || isRightPressed() || isDownPressed() || isUpPressed();
+    }
+
     public void setUpKey(int upKey) {
         removeKey(this.upKey);
         bindKey(upKey);
