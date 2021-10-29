@@ -2,13 +2,10 @@ package cegepst.engine.entities;
 
 import cegepst.engine.controls.Direction;
 
-public abstract class MovableEntity extends Entity{
+public abstract class MovableEntity extends UpdatableEntity {
 
     private int speed;
     private Direction direction = Direction.UP;
-
-    //public abstract void update();
-
 
     public void moveDown() {
         move(Direction.DOWN);
