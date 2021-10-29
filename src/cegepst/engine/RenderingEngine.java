@@ -52,8 +52,7 @@ public class RenderingEngine {
         frame.setTitle("Bouncing Balls");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// close the app when click on the "X"
         frame.setState(JFrame.NORMAL);
-        // Supprimer la barre de l'application
-        // setUndecorated(true);
+        frame.setUndecorated(true);
     }
 
     private void initializePanel() {
