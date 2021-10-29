@@ -41,7 +41,7 @@ public class MovementController extends Controller{
     }
 
     public void setDownKey(int downKey) {
-        removeKey(this.upKey);
+        removeKey(this.downKey);
         bindKey(downKey);
         this.downKey = downKey;
     }
