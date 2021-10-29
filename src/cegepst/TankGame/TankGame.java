@@ -1,6 +1,6 @@
 package cegepst.TankGame;
 
-import cegepst.MovingRectangle.GamePad;
+import cegepst.TankGame.GamePad;
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 
