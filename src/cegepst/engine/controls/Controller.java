@@ -51,7 +51,7 @@ public abstract class Controller implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int keycode = e.getKeyCode();
         if (pressedKeys.containsKey(keycode)) {
-            pressedKeys.put(keycode, true);
+            pressedKeys.put(keycode, false);
         }
     }
 }
