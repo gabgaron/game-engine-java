@@ -29,6 +29,14 @@ public abstract class MovableEntity extends UpdatableEntity {
         y += direction.getVelocityY(speed);
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     public int getSpeed() {
         return speed;
     }
@@ -36,4 +44,6 @@ public abstract class MovableEntity extends UpdatableEntity {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
+
 }
