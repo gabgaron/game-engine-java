@@ -12,7 +12,7 @@ public class Player extends ControllableEntity {
         setDimension(30, 60);
         setSpeed(4);
     }
-
+    @Override
     public void update(InputHandler inputHandler) {
         if (inputHandler.isDownPressed()) {
             moveDown();
@@ -24,7 +24,7 @@ public class Player extends ControllableEntity {
             moveRight();
         }
     }
-
+    @Override
     public void draw(Buffer buffer) {
         buffer.drawRectangle(x, y, width, height, Color.RED);
     }
