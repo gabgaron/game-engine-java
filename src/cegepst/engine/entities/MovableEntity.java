@@ -2,10 +2,26 @@ package cegepst.engine.entities;
 
 import cegepst.engine.controls.Direction;
 
+import java.awt.*;
+
 public abstract class MovableEntity extends UpdatableEntity {
 
+    private Collision collision;
     private int speed;
     private Direction direction = Direction.UP;
+    private boolean moved;
+    int lastX;
+    int lastY;
+
+    public MovableEntity() {
+        collision = new Collision(this);
+        speed = 1;
+    }
+
+    @Override
+    public void update() {
+        moved = false;
+    }
 
     public void moveDown() {
         move(Direction.DOWN);
@@ -25,8 +41,12 @@ public abstract class MovableEntity extends UpdatableEntity {
 
     public void move(Direction direction) {
         this.direction = direction;
-        x += direction.getVelocityX(speed);
-        y += direction.getVelocityY(speed);
+        int allowedSpeed = collision.getAllowedSpeed(direction);
+        x += direction.getVelocityX(allowedSpeed);
+        y += direction.getVelocityY(allowedSpeed);
+        moved = (x != lastX || y != lastY);
+        lastX = x;
+        lastY = y;
     }
 
     public Direction getDirection() {
@@ -45,5 +65,33 @@ public abstract class MovableEntity extends UpdatableEntity {
         this.speed = speed;
     }
 
+    public Rectangle getHitBox() {
+        switch (direction) {
+            case UP: return getUpperHitBox();
+            case DOWN: return getLowerHitBox();
+            case LEFT: return  getLeftHitBox();
+            case RIGHT: return  getRightHitBox();
+            default: return getBounds();
+        }
+    }
 
+    public boolean hitBoxIntersectsWith(StaticEntity other) {
+        return getHitBox().intersects(other.getBounds());
+    }
+
+    private Rectangle getLeftHitBox() {
+        return new Rectangle(x - speed, y , speed, height);
+    }
+
+    private Rectangle getRightHitBox() {
+        return new Rectangle(x + width, y , speed, height);
+    }
+
+    private Rectangle getUpperHitBox() {
+        return new Rectangle(x, y - speed , width, speed);
+    }
+
+    private Rectangle getLowerHitBox() {
+        return new Rectangle(x, y + height , width, speed);
+    }
 }

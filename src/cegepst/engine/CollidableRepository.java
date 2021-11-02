@@ -9,10 +9,10 @@ import java.util.List;
 
 public class CollidableRepository implements Iterable<StaticEntity>{
 
-    private CollidableRepository instance;
+    private static CollidableRepository instance;
     private final List<StaticEntity> registeredEntities;
 
-    public CollidableRepository getInstance() {
+    public static CollidableRepository getInstance() {
         if (instance == null) {
             instance = new CollidableRepository();
         }
