@@ -6,10 +6,17 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
-
+    private static RenderingEngine instance;
     private JFrame frame;
     private JPanel panel;
     private BufferedImage bufferedImage;
+
+    public static RenderingEngine getInstance() {
+        if (instance == null) {
+            instance = new RenderingEngine();
+        }
+        return instance;
+    }
 
     public RenderingEngine() {
         initializeFrame();
