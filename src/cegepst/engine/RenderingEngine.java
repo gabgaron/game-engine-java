@@ -18,7 +18,7 @@ public class RenderingEngine {
         return instance;
     }
 
-    public RenderingEngine() {
+    private RenderingEngine() {
         initializeFrame();
         initializePanel();
     }
