@@ -1,7 +1,9 @@
 package cegepst.TankGame;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.CollidableRepository;
 import cegepst.engine.Game;
+import cegepst.engine.entities.StaticEntity;
 
 import java.util.ArrayList;
 
@@ -35,10 +37,27 @@ public class TankGame extends Game {
         if (gamePad.isFirePressed() && tank.canFire()) {
             missiles.add(tank.fire());
         }
+        ArrayList<StaticEntity> killedEntities = new ArrayList<>();
+
         for (Missile missile : missiles) {
             missile.update();
+            for (Brick brick: bricks) {
+                if (missile.hitBoxIntersectsWith(brick)) {
+                    killedEntities.add(brick);
+                    killedEntities.add(missile);
+                }
+            }
         }
 
+        for (StaticEntity entity : killedEntities) {
+            if (entity instanceof Brick) {
+                bricks.remove(entity);
+            }
+            if (entity instanceof  Missile) {
+                missiles.remove(entity);
+            }
+            CollidableRepository.getInstance().unregisterEntity(entity);
+        }
     }
 
     @Override
