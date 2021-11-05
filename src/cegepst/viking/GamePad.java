@@ -8,11 +8,11 @@ import java.awt.event.KeyEvent;
 public class GamePad extends MovementController {
 
     private int quitKey = KeyEvent.VK_Q;
-    private int fireKey = KeyEvent.VK_SPACE;
+    private int soundKey = KeyEvent.VK_SPACE;
 
     public GamePad() {
         bindKey(quitKey);
-        bindKey(fireKey);
+        bindKey(soundKey);
         RenderingEngine.getInstance().addKeyListener(this);
     }
 
@@ -20,7 +20,7 @@ public class GamePad extends MovementController {
         return isKeyPressed(quitKey);
     }
 
-    public boolean isFirePressed() {
-        return isKeyPressed(fireKey);
+    public boolean isSoundPressed() {
+        return isKeyPressed(soundKey);
     }
 }

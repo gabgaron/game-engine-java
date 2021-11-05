@@ -3,11 +3,18 @@ package cegepst.viking;
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 public class VikingGame extends Game {
     private World world;
     private GamePad gamePad;
     private Player player;
     private Tree tree;
+    private int soundCooldown;
+
+
     @Override
     public void initialize() {
         gamePad = new GamePad();
@@ -17,6 +24,17 @@ public class VikingGame extends Game {
         player = new Player(gamePad);
         player.teleport(200, 200);
 
+
+
+        try {
+            Clip clip = AudioSystem.getClip();
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResourceAsStream("musics/map1.wav"));
+            clip.open(inputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -29,7 +47,16 @@ public class VikingGame extends Game {
         } else {
             tree.blockadeFromBottom();
         }
-            player.update();
+        player.update();
+
+        soundCooldown--;
+        if (soundCooldown < 0) {
+            soundCooldown = 0;
+        }
+        if (gamePad.isSoundPressed() && soundCooldown == 0) {
+            soundCooldown = 40;
+            Sound.play("sounds/best1.wav");
+        }
     }
 
     @Override
