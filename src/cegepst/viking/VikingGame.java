@@ -13,8 +13,7 @@ public class VikingGame extends Game {
         gamePad = new GamePad();
         world = new World();
         world.load();
-        tree = new Tree();
-        tree.teleport(300, 350);
+        tree = new Tree(300, 350);
         player = new Player(gamePad);
         player.teleport(200, 200);
 
