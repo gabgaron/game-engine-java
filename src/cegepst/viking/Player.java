@@ -52,6 +52,7 @@ public class Player extends ControllableEntity {
 
     @Override
     public void draw(Buffer buffer) {
+        //todo si dans le jeu, criss de cave. va refactor ça...
         if (getDirection() == Direction.RIGHT) {
             buffer.drawImage(rightFrames[currentAnimationFrame], x, y);
         } else if (getDirection() == Direction.LEFT) {
