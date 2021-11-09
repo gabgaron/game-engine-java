@@ -1,14 +1,12 @@
 package cegepst.viking;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.SpriteSheetLoader;
 import cegepst.engine.controls.Direction;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Player extends ControllableEntity {
 
@@ -65,14 +63,11 @@ public class Player extends ControllableEntity {
     }
     //todo meme code...
     private void loadSpriteSheet() {
-        try {
-            spriteSheet = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream(SPRITE_SHEET_PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        spriteSheet = SpriteSheetLoader.loadSpriteSheet(this, SPRITE_SHEET_PATH);
     }
-    //todo créer algo pour atomatiser ça
+    //todo créer algo pour automatiser ça
     private void loadAnimationFrames() {
+
         downFrames = new Image[3];
         downFrames[0] = spriteSheet.getSubimage(0, 128, width, height); // 4 x 32 pour aller chercher le viking
         downFrames[1] = spriteSheet.getSubimage(32, 128, width, height);

@@ -1,6 +1,7 @@
 package cegepst.viking;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.SpriteSheetLoader;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -34,10 +35,12 @@ public class World {
 
     //todo class loader --> refactor
     public void load() {
-        try {
+        background = SpriteSheetLoader.loadSpriteSheet(this, MAP_PATH);
+
+        /*try {
             background = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream(MAP_PATH));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
