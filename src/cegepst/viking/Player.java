@@ -13,8 +13,9 @@ public class Player extends ControllableEntity {
     private static final int ANIMATION_SPEED = 8;
     private int currentAnimationFrame = 1; // idle frame (middle)
     //todo spriteSheet loader;
-    private static final String SPRITE_SHEET_PATH = "images/player.png";
-    private BufferedImage spriteSheet;
+    //private static final String SPRITE_SHEET_PATH = "images/player.png";
+    //private BufferedImage spriteSheet; ai-je le droit de faire ça ?
+    private BufferedImage spriteSheet = SpriteSheetLoader.loadSpriteSheet(this,"images/player.png");
     private Image[] rightFrames;
     private Image[] leftFrames;
     private Image[] upFrames;
@@ -61,9 +62,9 @@ public class Player extends ControllableEntity {
             buffer.drawImage(downFrames[currentAnimationFrame], x, y);
         }
     }
-    //todo meme code...
+
     private void loadSpriteSheet() {
-        spriteSheet = SpriteSheetLoader.loadSpriteSheet(this, SPRITE_SHEET_PATH);
+        //spriteSheet = SpriteSheetLoader.loadSpriteSheet(this, SPRITE_SHEET_PATH);
     }
     //todo créer algo pour automatiser ça
     private void loadAnimationFrames() {
