@@ -26,7 +26,7 @@ public class Player extends ControllableEntity {
         super(controller);
         setDimension(32, 32);
         setSpeed(3);
-        loadSpriteSheet();
+        //loadSpriteSheet();
         loadAnimationFrames();
 
     }
@@ -63,13 +63,16 @@ public class Player extends ControllableEntity {
         }
     }
 
-    private void loadSpriteSheet() {
+    /*private void loadSpriteSheet() {
         //spriteSheet = SpriteSheetLoader.loadSpriteSheet(this, SPRITE_SHEET_PATH);
-    }
+    }*/
     //todo créer algo pour automatiser ça
     private void loadAnimationFrames() {
-
-        downFrames = new Image[3];
+        downFrames = assignImages(0, 128, width, height, 3);
+        leftFrames = assignImages(0, 160, width, height, 3);
+        rightFrames = assignImages(0, 192, width, height, 3);
+        upFrames = assignImages(0, 224, width, height, 3);
+        /*downFrames = new Image[3];
         downFrames[0] = spriteSheet.getSubimage(0, 128, width, height); // 4 x 32 pour aller chercher le viking
         downFrames[1] = spriteSheet.getSubimage(32, 128, width, height);
         downFrames[2] = spriteSheet.getSubimage(64, 128, width, height);
@@ -87,7 +90,18 @@ public class Player extends ControllableEntity {
         upFrames = new Image[3];
         upFrames[0] = spriteSheet.getSubimage(0, 224, width, height);
         upFrames[1] = spriteSheet.getSubimage(32, 224, width, height);
-        upFrames[2] = spriteSheet.getSubimage(64, 224, width, height);
+        upFrames[2] = spriteSheet.getSubimage(64, 224, width, height);*/
+    }
+
+    private Image[] assignImages(int startingX, int startingY, int width, int height, int tableLength) {
+        Image[] images = new Image[tableLength];
+        int x = startingX;
+        int y = startingY;
+        for (int i = 0; i < tableLength; i++) {
+            images[i] = spriteSheet.getSubimage(x,y,width,height);
+            x += width;
+        }
+        return images;
     }
 }
 
