@@ -2,6 +2,7 @@ package cegepst.viking;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
+import cegepst.engine.RenderingEngine;
 
 public class VikingGame extends Game {
     private World world;
@@ -21,6 +22,7 @@ public class VikingGame extends Game {
         player = new Player(gamePad);
         player.teleport(200, 200);
         music = new MusicLoader("musics/map1.wav");
+        RenderingEngine.getInstance().getScreen().hideCursor();
     }
 
     @Override

@@ -50,11 +50,13 @@ public class RenderingEngine {
         return new Buffer(graphics);
     }
 
+    public Screen getScreen() {
+        return screen;
+    }
+
     private void initializeScreen() {
         screen = new Screen();
         screen.setTitle("game");
-
-
     }
 
     private void initializePanel() {
