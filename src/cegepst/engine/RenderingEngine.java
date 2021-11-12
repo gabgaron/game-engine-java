@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
     private static RenderingEngine instance;
-    private JFrame frame;
+    private Screen screen;
     private JPanel panel;
     private BufferedImage bufferedImage;
 
@@ -19,17 +19,16 @@ public class RenderingEngine {
     }
 
     private RenderingEngine() {
-        initializeFrame();
+        initializeScreen();
         initializePanel();
     }
 
     public void start() {
-        frame.setVisible(true);
+        screen.start();
     }
 
     public void stop() {
-        frame.setVisible(false);
-        frame.dispose();
+        screen.end();
     }
 
     public void addKeyListener(KeyListener listener) {
@@ -51,15 +50,11 @@ public class RenderingEngine {
         return new Buffer(graphics);
     }
 
-    private void initializeFrame() {
-        frame = new JFrame();
-        frame.setSize(800,600);
-        frame.setLocationRelativeTo(null); // center frame on screen
-        frame.setResizable(false);
-        frame.setTitle("Bouncing Balls");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// close the app when click on the "X"
-        frame.setState(JFrame.NORMAL);
-        frame.setUndecorated(true);
+    private void initializeScreen() {
+        screen = new Screen();
+        screen.setTitle("game");
+
+
     }
 
     private void initializePanel() {
@@ -67,7 +62,7 @@ public class RenderingEngine {
         panel.setBackground(Color.BLUE);
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
-        frame.add(panel); // ajouter la panneau dans le jframe
+        screen.setPanel(panel);
     }
 
     private RenderingHints getOptimalRenderingHints() {
