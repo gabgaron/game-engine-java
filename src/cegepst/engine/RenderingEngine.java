@@ -57,6 +57,7 @@ public class RenderingEngine {
     private void initializeScreen() {
         screen = new Screen();
         screen.setTitle("game");
+        screen.setSize(800, 600);
     }
 
     private void initializePanel() {

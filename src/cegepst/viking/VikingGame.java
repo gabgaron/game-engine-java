@@ -23,6 +23,7 @@ public class VikingGame extends Game {
         player.teleport(200, 200);
         music = new MusicLoader("musics/map1.wav");
         RenderingEngine.getInstance().getScreen().hideCursor();
+        RenderingEngine.getInstance().getScreen().fullScreen();
     }
 
     @Override
