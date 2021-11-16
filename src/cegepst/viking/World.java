@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class World {
 
-    private static final String MAP_PATH = "images/demo.png";
+    private static final String MAP_PATH = "images/demo2.png";
     private Image background;
     private ArrayList<Blockade> worldBorders;
 

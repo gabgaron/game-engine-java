@@ -5,7 +5,10 @@ public enum Direction {
     LEFT(-1, 0),
     RIGHT(1, 0),
     UP(0, -1),
-    DOWN(0, 1);
+    DOWN(0, 1),
+    JUMPING(0, -1),
+    FALLING(0, 1);
+
 
     private final int xMultiplier;
     private final int yMultiplier;

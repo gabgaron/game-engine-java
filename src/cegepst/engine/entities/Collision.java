@@ -32,11 +32,22 @@ public class Collision {
     }
 
     private int getAllowedLeftSpeed() {
-        return distance(other -> entity.x - (other.x + other.width));
+        return horizontalDistance(other -> entity.x - (other.x + other.width));
     }
 
     private int getAllowedRightSpeed() {
-        return distance(other -> other.x - (entity.x + entity.width));
+        return horizontalDistance(other -> other.x - (entity.x + entity.width));
+    }
+
+    private int horizontalDistance(DistanceCalculator calculator) {
+        Rectangle collisionBound = entity.getHitBox();
+        int allowedDistance = entity.getHorizontalSpeed();
+        for (StaticEntity other : CollidableRepository.getInstance()) {
+            if (collisionBound.intersects(other.getBounds())) {
+                allowedDistance = Math.min(allowedDistance, calculator.calculateWidth(other));
+            }
+        }
+        return allowedDistance;
     }
 
     private int distance(DistanceCalculator calculator) {

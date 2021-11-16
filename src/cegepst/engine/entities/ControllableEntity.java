@@ -1,6 +1,5 @@
 package cegepst.engine.entities;
 
-import cegepst.MovingRectangle.InputHandler;
 import cegepst.engine.controls.MovementController;
 
 

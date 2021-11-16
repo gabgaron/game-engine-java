@@ -28,24 +28,17 @@ public class Screen {
     }
 
     public void fullScreen() {
-
-
         device.setFullScreenWindow(frame);
         device.setDisplayMode(fullScreenDisplayMode);
         frame.setLocationRelativeTo(null);
         isFullScreenMode = true;
-
     }
 
     public void windowed() {
-        if (device.isDisplayChangeSupported()) {
-            if (device.isFullScreenSupported()) {
-                device.setFullScreenWindow(null);
-            }
-            device.setDisplayMode(windowedDisplayMode);
-            frame.setLocationRelativeTo(null);
-            isFullScreenMode = false;
-        }
+        device.setFullScreenWindow(null);
+        device.setDisplayMode(windowedDisplayMode);
+        frame.setLocationRelativeTo(null);
+        isFullScreenMode = false;
     }
 
     public void toggleFullScreen() {

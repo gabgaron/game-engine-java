@@ -9,6 +9,7 @@ public abstract class MovableEntity extends UpdatableEntity {
 
     private Collision collision;
     private int speed;
+    private int horizontalSpeed;
     private Direction direction = Direction.UP;
     private boolean moved;
     int lastX;
@@ -17,6 +18,7 @@ public abstract class MovableEntity extends UpdatableEntity {
     public MovableEntity() {
         collision = new Collision(this);
         speed = 1;
+        horizontalSpeed = 1;
     }
 
     @Override
@@ -62,8 +64,16 @@ public abstract class MovableEntity extends UpdatableEntity {
         return speed;
     }
 
+    public int getHorizontalSpeed() {
+        return horizontalSpeed;
+    }
+
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public void setHorizontalSpeed(int horizontalSpeed) {
+        this.horizontalSpeed = horizontalSpeed;
     }
 
     public boolean hasMoved() {
@@ -82,6 +92,8 @@ public abstract class MovableEntity extends UpdatableEntity {
             case DOWN: return getLowerHitBox();
             case LEFT: return  getLeftHitBox();
             case RIGHT: return  getRightHitBox();
+            case JUMPING: return getJumpingHitBox();
+            case FALLING: return getFallingHitBox();
             default: return getBounds();
         }
     }
@@ -91,18 +103,26 @@ public abstract class MovableEntity extends UpdatableEntity {
     }
 
     private Rectangle getLeftHitBox() {
-        return new Rectangle(x - speed, y , speed, height);
+        return new Rectangle(x - horizontalSpeed, y , horizontalSpeed, height);
     }
 
     private Rectangle getRightHitBox() {
-        return new Rectangle(x + width, y , speed, height);
+        return new Rectangle(x + width, y ,horizontalSpeed , height);
     }
 
     private Rectangle getUpperHitBox() {
         return new Rectangle(x, y - speed , width, speed);
     }
 
+    private Rectangle getJumpingHitBox() {
+        return new Rectangle(x, height , width, 1);
+    }
+
     private Rectangle getLowerHitBox() {
         return new Rectangle(x, y + height , width, speed);
+    }
+
+    private Rectangle getFallingHitBox() {
+        return new Rectangle(x, y + height , width, 1);
     }
 }

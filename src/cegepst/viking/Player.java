@@ -2,7 +2,6 @@ package cegepst.viking;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.SpriteSheetLoader;
-import cegepst.engine.controls.Direction;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import java.awt.*;
@@ -15,7 +14,7 @@ public class Player extends ControllableEntity {
     //todo spriteSheet loader;
     //private static final String SPRITE_SHEET_PATH = "images/player.png";
     //private BufferedImage spriteSheet; ai-je le droit de faire ça ?
-    private BufferedImage spriteSheet = SpriteSheetLoader.loadSpriteSheet(this,"images/player.png");
+    private BufferedImage spriteSheet = SpriteSheetLoader.loadSpriteSheet(this,"images/hojikasmonsters.png");
     private Image[] rightFrames;
     private Image[] leftFrames;
     private Image[] upFrames;
@@ -35,7 +34,7 @@ public class Player extends ControllableEntity {
     public void update() {
         super.update();
         moveAccordingToController();
-        if (hasMoved()) {
+        //if (hasMoved()) {
             --nextFrame;
             if (nextFrame == 0) {
                 ++currentAnimationFrame;
@@ -44,15 +43,16 @@ public class Player extends ControllableEntity {
                 }
                 nextFrame = ANIMATION_SPEED;
             }
-        } else {
+        /*} else {
             currentAnimationFrame = 1; // back to idle frame
-        }
+        }*/
     }
 
     @Override
     public void draw(Buffer buffer) {
         //todo si dans le jeu, criss de cave. va refactor ça...
-        if (getDirection() == Direction.RIGHT) {
+        buffer.drawImage(rightFrames[currentAnimationFrame], x, y);
+        /*if (getDirection() == Direction.RIGHT) {
             buffer.drawImage(rightFrames[currentAnimationFrame], x, y);
         } else if (getDirection() == Direction.LEFT) {
             buffer.drawImage(leftFrames[currentAnimationFrame], x, y);
@@ -60,7 +60,7 @@ public class Player extends ControllableEntity {
             buffer.drawImage(upFrames[currentAnimationFrame], x, y);
         } else if (getDirection() == Direction.DOWN) {
             buffer.drawImage(downFrames[currentAnimationFrame], x, y);
-        }
+        }*/
     }
 
     /*private void loadSpriteSheet() {
@@ -68,10 +68,10 @@ public class Player extends ControllableEntity {
     }*/
     //todo créer algo pour automatiser ça
     private void loadAnimationFrames() {
-        downFrames = assignImages(0, 128, width, height, 3);
-        leftFrames = assignImages(0, 160, width, height, 3);
-        rightFrames = assignImages(0, 192, width, height, 3);
-        upFrames = assignImages(0, 224, width, height, 3);
+        downFrames = assignImages(192, 128, width, height, 3);
+        leftFrames = assignImages(192, 160, width, height, 3);
+        rightFrames = assignImages(192, 192, width, height, 3);
+        upFrames = assignImages(192, 224, width, height, 3);
         /*downFrames = new Image[3];
         downFrames[0] = spriteSheet.getSubimage(0, 128, width, height); // 4 x 32 pour aller chercher le viking
         downFrames[1] = spriteSheet.getSubimage(32, 128, width, height);
