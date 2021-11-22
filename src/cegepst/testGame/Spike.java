@@ -7,15 +7,15 @@ import cegepst.engine.entities.StaticEntity;
 
 import java.awt.*;
 
-public class Brick extends StaticEntity {
+public class Spike extends StaticEntity {
 
     private Image image;
-    private static final String BRICK_PATH = "images/brick.png";
+    private static final String SPIKE_PATH = "images/spike.png";
 
-    public Brick(int x, int y) {
+    public Spike(int x, int y) {
         teleport(x, y);
-        setDimension(32, 20);
-        image = SpriteSheetLoader.loadSpriteSheet(this, BRICK_PATH);
+        setDimension(16, 16);
+        image = SpriteSheetLoader.loadSpriteSheet(this, SPIKE_PATH);
         CollidableRepository.getInstance().registerEntity(this);
     }
 

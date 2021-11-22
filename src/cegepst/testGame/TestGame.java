@@ -1,31 +1,24 @@
 package cegepst.testGame;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.Camera;
 import cegepst.engine.Game;
+import cegepst.engine.RenderingEngine;
 
-import java.util.ArrayList;
 
 public class TestGame extends Game {
     private GamePad gamePad;
     private Player player;
-    private ArrayList<Blockade> worldBorders;
-    private ArrayList<Brick> bricks;
+    private TestWorld1 testWorld1;
+    private int worldCounter;
 
     @Override
     public void initialize() {
-        worldBorders = new ArrayList<>();
-        bricks = new ArrayList<>();
-        Blockade bottomBorder = new Blockade();
-        bottomBorder.setDimension(800,20);
-        bottomBorder.teleport(0,400);
-        bricks.add(new Brick(500, 100));
-        bricks.add(new Brick(500, 116));
-        bricks.add(new Brick(500, 132));
-        bricks.add(new Brick(484, 380));
-        bricks.add(new Brick(500, 380));
-        worldBorders.add(bottomBorder);
+        testWorld1 = new TestWorld1(worldCounter);
         gamePad = new GamePad();
         player = new Player(gamePad);
+        //RenderingEngine.getInstance().getScreen().fullScreen();
+
     }
 
     @Override
@@ -33,26 +26,52 @@ public class TestGame extends Game {
         if (gamePad.isQuitPressed()) {
             stop();
         }
-
-        player.update();
         if (gamePad.isJumpedPressed() && player.canJump()) {
             player.jump();
         }
+        player.update();
+        setCamera();
+        generateNewWorld();
+        checkIfPlayerIsDead();
     }
+
+
 
     @Override
     public void draw(Buffer buffer) {
-        for (Blockade blockade : worldBorders) {
-            blockade.draw(buffer);
-        }
-        for (Brick brick : bricks) {
-            brick.draw(buffer);
-        }
+        testWorld1.draw(buffer);
         player.draw(buffer);
     }
 
     @Override
     public void conclude() {
 
+    }
+
+    private void generateNewWorld() {
+        if (player.getX() > 2250) {
+
+            worldCounter++;
+            testWorld1.unregisterCollision();
+            testWorld1 = new TestWorld1(worldCounter);
+            Camera.getInstance().setX(0);
+            player.setX(250);
+        }
+    }
+
+    private void setCamera() {
+
+        Camera.getInstance().position(player);
+
+    }
+
+    private void checkIfPlayerIsDead() {
+        if (player.hasDied()) {
+            worldCounter = 0;
+            testWorld1.unregisterCollision();
+            testWorld1 = new TestWorld1(worldCounter);
+            Camera.getInstance().setX(0);
+            player.setX(250);
+        }
     }
 }

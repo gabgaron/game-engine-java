@@ -27,7 +27,7 @@ public abstract class StaticEntity {
         return getBounds().intersects(other.getBounds());
     }
 
-    protected Rectangle getBounds() {
+    public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
 
@@ -37,6 +37,10 @@ public abstract class StaticEntity {
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
     }
 
     public int getWidth() {

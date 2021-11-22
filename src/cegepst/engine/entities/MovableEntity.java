@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.controls.Direction;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class MovableEntity extends UpdatableEntity {
 
@@ -12,8 +13,8 @@ public abstract class MovableEntity extends UpdatableEntity {
     private int horizontalSpeed;
     private Direction direction = Direction.UP;
     private boolean moved;
-    int lastX;
-    int lastY;
+    private int lastX;
+    private int lastY;
 
     public MovableEntity() {
         collision = new Collision(this);
@@ -102,12 +103,23 @@ public abstract class MovableEntity extends UpdatableEntity {
         return getHitBox().intersects(other.getBounds());
     }
 
+    public Image[] assignImages(int startingX, int startingY, int tableLength, BufferedImage spriteSheet) {
+        Image[] images = new Image[tableLength];
+        int x = startingX;
+        int y = startingY;
+        for (int i = 0; i < tableLength; i++) {
+            images[i] = spriteSheet.getSubimage(x,y,width,height);
+            x += width;
+        }
+        return images;
+    }
+
     private Rectangle getLeftHitBox() {
         return new Rectangle(x - horizontalSpeed, y , horizontalSpeed, height);
     }
 
     private Rectangle getRightHitBox() {
-        return new Rectangle(x + width, y ,horizontalSpeed , height);
+        return new Rectangle(x + width, y ,1 , height);
     }
 
     private Rectangle getUpperHitBox() {
@@ -115,7 +127,7 @@ public abstract class MovableEntity extends UpdatableEntity {
     }
 
     private Rectangle getJumpingHitBox() {
-        return new Rectangle(x, height , width, 1);
+        return new Rectangle(x, height , width, -1);
     }
 
     private Rectangle getLowerHitBox() {

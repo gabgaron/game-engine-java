@@ -27,6 +27,16 @@ public class CollidableRepository implements Iterable<StaticEntity>{
         registeredEntities.remove(entity);
     }
 
+    public void unregisterAll() {
+        for (StaticEntity entity : registeredEntities) {
+            unregisterEntity(entity);
+        }
+    }
+
+    public List<StaticEntity> getRegisteredEntities() {
+        return registeredEntities;
+    }
+
     public void registerEntities(Collection<StaticEntity> entities) {
         registeredEntities.addAll(entities);
     }

@@ -37,14 +37,14 @@ public class RenderingEngine {
 
     public void renderBufferOnScreen() {
         Graphics2D graphics2D = (Graphics2D) panel.getGraphics();
-        graphics2D.drawImage(bufferedImage, 0, 0, panel);
+        graphics2D.drawImage(bufferedImage, Camera.getInstance().getX(), Camera.getInstance().getY(), panel);
         Toolkit.getDefaultToolkit().sync();
         graphics2D.dispose();
     }
 
     public Buffer getRenderingBuffer() {
-        //faire un viewport pour changer les dimensions
-        bufferedImage = new BufferedImage(800,600, BufferedImage.TYPE_INT_RGB);
+        //TODO : CHANGE LE X ET Y CRISS DE COLON.
+        bufferedImage = new BufferedImage(2800,600, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bufferedImage.createGraphics();
         graphics.setRenderingHints(getOptimalRenderingHints());
         return new Buffer(graphics);

@@ -1,6 +1,7 @@
 package cegepst.viking;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.Camera;
 import cegepst.engine.Game;
 import cegepst.engine.RenderingEngine;
 
